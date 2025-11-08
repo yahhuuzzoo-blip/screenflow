@@ -43,6 +43,9 @@ public:
     int getEventsDropped() const;
 
 private:
+    // Event queue management
+    void addEventToQueue(const InputEvent& event);
+
     // Event creation
     InputEvent createTouchEvent(InputEvent::Type type, int x, int y, int pointer = 0);
     InputEvent createKeyEvent(InputEvent::Type type, int keyCode, int modifiers);
