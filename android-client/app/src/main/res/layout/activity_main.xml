@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ScreenFlow.AppBarOverlay">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/Theme.ScreenFlow.PopupOverlay"
+            app:title="@string/app_name" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:fillViewport="true"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:spacing="16dp">
+
+            <!-- Connection Status Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardConnectionStatus"
+                style="@style/ScreenFlowCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/indicatorConnectionStatus"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_status_disconnected"
+                        tools:backgroundTint="@color/status_disconnected" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textConnectionStatus"
+                            style="@style/ScreenFlowText.Subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/connection_status_disconnected" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ScreenFlow Remote Control"
+                            style="@style/ScreenFlowText.Caption" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Service Status Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/layoutServiceStatus"
+                style="@style/ScreenFlowCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        style="@style/ScreenFlowText.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service Status"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/status_indicator"
+                            android:backgroundTint="@color/status_connected"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Screen Capture Active"
+                            style="@style/ScreenFlowText.Body" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Service Controls -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginVertical="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonStartService"
+                    style="@style/ScreenFlowButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/start_service"
+                    android:icon="@drawable/ic_play_arrow" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonStopService"
+                    style="@style/ScreenFlowButton.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/stop_service"
+                    android:icon="@drawable/ic_stop"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+            <!-- Pairing Section -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ScreenFlowCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        style="@style/ScreenFlowText.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pair with PC"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        style="@style/ScreenFlowText.Body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pairing_instructions"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonScanQrCode"
+                            style="@style/ScreenFlowButton.Secondary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/scan_qr_code"
+                            android:icon="@drawable/ic_qr_code_scanner" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonPairWithPc"
+                            style="@style/ScreenFlowButton.Secondary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/enter_manual_code"
+                            android:icon="@drawable/ic_keyboard" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Connection Statistics -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/layoutStats"
+                style="@style/ScreenFlowCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        style="@style/ScreenFlowText.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Connection Statistics"
+                        android:layout_marginBottom="12dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:rowCount="2">
+
+                        <TextView
+                            style="@style/ScreenFlowText.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resolution"
+                            android:layout_columnWeight="1" />
+
+                        <TextView
+                            android:id="@+id/textResolution"
+                            style="@style/ScreenFlowText.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1920x1080"
+                            android:layout_columnWeight="1"
+                            android:gravity="end"
+                            tools:text="1920x1080" />
+
+                        <TextView
+                            style="@style/ScreenFlowText.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FPS"
+                            android:layout_columnWeight="1" />
+
+                        <TextView
+                            android:id="@+id/textFps"
+                            style="@style/ScreenFlowText.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30"
+                            android:layout_columnWeight="1"
+                            android:gravity="end"
+                            tools:text="30" />
+
+                        <TextView
+                            style="@style/ScreenFlowText.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bitrate"
+                            android:layout_columnWeight="1" />
+
+                        <TextView
+                            android:id="@+id/textBitrate"
+                            style="@style/ScreenFlowText.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2.5 Mbps"
+                            android:layout_columnWeight="1"
+                            android:gravity="end"
+                            tools:text="2.5 Mbps" />
+
+                        <TextView
+                            style="@style/ScreenFlowText.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Latency"
+                            android:layout_columnWeight="1" />
+
+                        <TextView
+                            android:id="@+id/textLatency"
+                            style="@style/ScreenFlowText.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="45ms"
+                            android:layout_columnWeight="1"
+                            android:gravity="end"
+                            tools:text="45ms" />
+
+                    </GridLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginVertical="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/ScreenFlowText.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Connected for:"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:id="@+id/textConnectionTime"
+                            style="@style/ScreenFlowText.Body"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="00:00:00"
+                            android:gravity="end"
+                            tools:text="00:05:23" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Settings Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSettings"
+                style="@style/ScreenFlowButton.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings"
+                android:icon="@drawable/ic_settings"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qr_scan_mask"
+    tools:context=".QRCodeActivity">
+
+    <!-- Camera view with barcode scanner -->
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/barcodeScanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:zxing_scanner_layout="@layout/custom_barcode_scanner"
+        app:zxing_use_texture_view="true" />
+
+    <!-- Permission request layout -->
+    <LinearLayout
+        android:id="@+id/layoutPermissionRequest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ic_camera_alt"
+            android:alpha="0.7"
+            android:tint="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/textViewInstructions"
+            style="@style/ScreenFlowText.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:text="@string/qr_permission_required" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonRequestPermission"
+            style="@style/ScreenFlowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grant Camera Permission"
+            android:icon="@drawable/ic_camera" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonClose"
+            style="@style/ScreenFlowButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Close"
+            android:icon="@drawable/ic_close" />
+
+    </LinearLayout>
+
+    <!-- Scanner controls overlay -->
+    <LinearLayout
+        android:id="@+id/layoutControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/scanner_controls_background"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonManualEntry"
+            style="@style/ScreenFlowButton.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Enter Code"
+            android:icon="@drawable/ic_keyboard" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonToggleFlash"
+            style="@style/ScreenFlowButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:minWidth="48dp"
+            android:icon="@drawable/ic_flash_off"
+            android:contentDescription="Toggle flash" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonClose"
+            style="@style/ScreenFlowButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:minWidth="48dp"
+            android:icon="@drawable/ic_close"
+            android:contentDescription="Close scanner" />
+
+    </LinearLayout>
+
+    <!-- Top overlay with instructions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@drawable/scanner_top_overlay"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/textViewInstructions"
+            style="@style/ScreenFlowText.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/qr_scan_instructions"
+            android:textColor="@android:color/white"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Or use manual entry below"
+            android:textColor="@android:color/white"
+            android:alpha="0.8"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</FrameLayout>
