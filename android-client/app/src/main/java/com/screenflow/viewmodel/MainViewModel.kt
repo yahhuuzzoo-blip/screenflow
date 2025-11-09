@@ -332,6 +332,9 @@ class MainViewModel : ViewModel() {
                 // 3. Exchange encryption keys
                 // 4. Establish secure connection
 
+                // Save session info for persistence
+                saveSessionInfo()
+
                 // Mock successful pairing
                 setPairingStatus(PairingStatus.SUCCESS)
                 setConnectionStatus(ConnectionStatus.CONNECTING)
