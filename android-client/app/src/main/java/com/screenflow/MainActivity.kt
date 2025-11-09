@@ -154,6 +154,14 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         }
     }
 
+    private fun checkAutoConnect() {
+        // Check if auto-connect is enabled and device is paired
+        if (SettingsManager.isAutoConnectEnabled() && viewModel.isPaired()) {
+            Timber.d("Auto-connect enabled and device paired - starting service")
+            startScreenCaptureService()
+        }
+    }
+
     private fun updateUIState() {
         val isServiceRunning = viewModel.isServiceRunning.value ?: false
         val isConnected = viewModel.connectionStatus.value == MainViewModel.ConnectionStatus.CONNECTED
