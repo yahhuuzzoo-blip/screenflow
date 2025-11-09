@@ -335,6 +335,11 @@ class ScreenCaptureService : Service() {
             .setSilent(true)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
 
+        // Check notification setting - if disabled, minimize notification visibility
+        if (!SettingsManager.isShowNotificationsEnabled()) {
+            builder.setPriority(NotificationCompat.PRIORITY_MIN)
+        }
+
         if (showActions) {
             // Add action buttons
             val disconnectIntent = Intent(this, ScreenCaptureService::class.java).apply {
