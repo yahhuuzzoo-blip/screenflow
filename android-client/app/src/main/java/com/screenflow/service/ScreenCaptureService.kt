@@ -14,9 +14,11 @@ import android.os.*
 import android.util.DisplayMetrics
 import androidx.core.app.NotificationCompat
 import com.screenflow.R
+import com.screenflow.ScreenFlowApplication
 import com.screenflow.capture.ScreenCaptureManager
 import com.screenflow.network.NetworkManager
 import com.screenflow.utils.ServiceUtils
+import com.screenflow.utils.SettingsManager
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
