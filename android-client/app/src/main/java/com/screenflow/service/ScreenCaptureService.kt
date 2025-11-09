@@ -407,6 +407,15 @@ class ScreenCaptureService : Service() {
             }
         }
 
+        // Release wake lock if held
+        wakeLock?.let {
+            if (it.isHeld) {
+                it.release()
+                Timber.d("WakeLock released")
+            }
+        }
+        wakeLock = null
+
         isServiceStarted.set(false)
         serviceState = STATE_STOPPED
     }
