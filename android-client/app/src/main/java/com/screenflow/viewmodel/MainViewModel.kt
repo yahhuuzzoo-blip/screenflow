@@ -189,6 +189,9 @@ class MainViewModel : ViewModel() {
                 currentSessionId = "mock_session_${System.currentTimeMillis()}"
                 serverInfo = "192.168.1.100:8080" // Mock server address
 
+                // Save session info for persistence
+                saveSessionInfo()
+
                 setPairingStatus(PairingStatus.SUCCESS)
                 setConnectionStatus(ConnectionStatus.CONNECTING)
 
