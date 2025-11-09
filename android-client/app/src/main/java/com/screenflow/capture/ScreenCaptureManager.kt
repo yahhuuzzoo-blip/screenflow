@@ -104,13 +104,16 @@ class ScreenCaptureManager(private val context: Context) {
         this.imageReader = imageReader
         this.virtualDisplay = virtualDisplay
 
+        // Load quality setting from preferences
+        loadQualityFromSettings()
+
         initializeThreading()
         initializeEncoder()
 
         // Set up image listener
         imageReader.setOnImageAvailableListener(imageListener, captureHandler)
 
-        Timber.d("ScreenCaptureManager initialized")
+        Timber.d("ScreenCaptureManager initialized with quality: ${currentQuality.name}")
     }
 
     fun start() {
