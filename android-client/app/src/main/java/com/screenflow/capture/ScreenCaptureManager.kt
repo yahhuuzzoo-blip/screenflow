@@ -196,6 +196,30 @@ class ScreenCaptureManager(private val context: Context) {
 
     fun getFrameStats(): FrameStats = frameStats
 
+    /**
+     * Load video quality setting from SettingsManager
+     */
+    private fun loadQualityFromSettings() {
+        val qualitySetting = SettingsManager.getVideoQuality()
+        currentQuality = when (qualitySetting) {
+            "low" -> QUALITY_LOW
+            "medium" -> QUALITY_MEDIUM
+            "high" -> QUALITY_HIGH
+            "auto" -> QUALITY_AUTO
+            else -> QUALITY_MEDIUM // Default fallback
+        }
+        Timber.d("Loaded quality setting: $qualitySetting -> ${currentQuality.name}")
+    }
+
+    /**
+     * Update video quality from current settings
+     * Can be called when settings change to apply new quality
+     */
+    fun updateQualityFromSettings() {
+        val qualitySetting = SettingsManager.getVideoQuality()
+        setQuality(qualitySetting)
+    }
+
     private fun initializeThreading() {
         // Capture thread for image processing
         captureThread = HandlerThread("ScreenCapture-Capture", Thread.NORM_PRIORITY).apply {
