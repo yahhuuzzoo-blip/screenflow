@@ -22,6 +22,7 @@ import com.journeyapps.barcodescanner.ScanIntentResult
 import com.screenflow.databinding.ActivityMainBinding
 import com.screenflow.service.ScreenCaptureService
 import com.screenflow.utils.PermissionUtils
+import com.screenflow.utils.SettingsManager
 import com.screenflow.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AppSettingsDialog
