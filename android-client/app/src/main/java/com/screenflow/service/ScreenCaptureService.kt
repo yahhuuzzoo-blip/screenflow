@@ -67,6 +67,7 @@ class ScreenCaptureService : Service() {
     // Service components
     private lateinit var notificationManager: NotificationManager
     private lateinit var serviceScope: CoroutineScope
+    private var wakeLock: PowerManager.WakeLock? = null
 
     // Display metrics
     private var screenWidth = 0
