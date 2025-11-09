@@ -135,7 +135,17 @@ class NetworkManager(private val context: Context) {
             disconnect()
         }
 
-        this.serverUrl = url
+        // Use relay server URL from settings if url is empty
+        val actualUrl = if (url.isEmpty()) SettingsManager.getRelayServerUrl() else url
+
+        // Validate URL format
+        val validatedUrl = when {
+            actualUrl.startsWith("ws://") || actualUrl.startsWith("wss://") -> actualUrl
+            actualUrl.isNotEmpty() -> "ws://$actualUrl" // Prepend ws:// if missing
+            else -> SettingsManager.getRelayServerUrl() // Fallback to settings default
+        }
+
+        this.serverUrl = validatedUrl
         this.sessionId = sessionId
         this.encryptionKey = encryptionKey
 
