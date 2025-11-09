@@ -88,6 +88,7 @@ class ScreenCaptureService : Service() {
         initializeManagers()
         initializeService()
         getDisplayMetrics()
+        acquireWakeLockIfEnabled()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
