@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         initializeViewModel()
         setupUI()
         observeViewModel()
+        checkAutoConnect()
 
         Timber.d("MainActivity created")
     }
