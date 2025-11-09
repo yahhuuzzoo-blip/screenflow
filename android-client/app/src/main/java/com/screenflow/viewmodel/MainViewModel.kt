@@ -214,6 +214,77 @@ class MainViewModel : ViewModel() {
         return currentSessionId
     }
 
+    /**
+     * Check if device is paired with a PC server
+     * @return true if valid session exists
+     */
+    fun isPaired(): Boolean {
+        // Check if we have valid session data
+        if (currentSessionId.isEmpty() || serverInfo.isEmpty()) {
+            return false
+        }
+
+        // Check if session has expired
+        val pairingTime = preferences.getLong(PREF_PAIRING_TIME, 0)
+        val currentTime = System.currentTimeMillis()
+
+        if (currentTime - pairingTime > SESSION_EXPIRY_MS) {
+            Timber.d("Session expired")
+            clearSessionInfo()
+            return false
+        }
+
+        return true
+    }
+
+    /**
+     * Get saved session ID
+     * @return session ID or empty string if not paired
+     */
+    fun getSessionId(): String {
+        return preferences.getString(PREF_SESSION_ID, "") ?: ""
+    }
+
+    /**
+     * Load session info from SharedPreferences
+     */
+    private fun loadSessionInfo() {
+        currentSessionId = preferences.getString(PREF_SESSION_ID, "") ?: ""
+        serverInfo = preferences.getString(PREF_SERVER_INFO, "") ?: ""
+
+        if (currentSessionId.isNotEmpty() && serverInfo.isNotEmpty()) {
+            Timber.d("Loaded saved session: $currentSessionId @ $serverInfo")
+        }
+    }
+
+    /**
+     * Save session info to SharedPreferences
+     */
+    private fun saveSessionInfo() {
+        preferences.edit().apply {
+            putString(PREF_SESSION_ID, currentSessionId)
+            putString(PREF_SERVER_INFO, serverInfo)
+            putLong(PREF_PAIRING_TIME, System.currentTimeMillis())
+            apply()
+        }
+        Timber.d("Saved session info")
+    }
+
+    /**
+     * Clear session info from SharedPreferences
+     */
+    private fun clearSessionInfo() {
+        preferences.edit().apply {
+            remove(PREF_SESSION_ID)
+            remove(PREF_SERVER_INFO)
+            remove(PREF_PAIRING_TIME)
+            apply()
+        }
+        currentSessionId = ""
+        serverInfo = ""
+        Timber.d("Cleared session info")
+    }
+
     private fun parseQRCodeData(qrData: String): QRCodeInfo? {
         return try {
             gson.fromJson(qrData, QRCodeInfo::class.java)
