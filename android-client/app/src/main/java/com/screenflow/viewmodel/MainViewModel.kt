@@ -66,10 +66,25 @@ class MainViewModel : ViewModel() {
     private var connectionStartTime: Long = 0
     private val gson = Gson()
 
+    // SharedPreferences for persistent session storage
+    private val preferences by lazy {
+        ScreenFlowApplication.instance.getSharedPreferences("screenflow_session", Context.MODE_PRIVATE)
+    }
+
+    companion object {
+        private const val PREF_SESSION_ID = "session_id"
+        private const val PREF_SERVER_INFO = "server_info"
+        private const val PREF_PAIRING_TIME = "pairing_time"
+        private const val SESSION_EXPIRY_MS = 24 * 60 * 60 * 1000L // 24 hours
+    }
+
     init {
         _connectionStatus.value = ConnectionStatus.DISCONNECTED
         _isServiceRunning.value = false
         _pairingStatus.value = PairingStatus.NONE
+
+        // Load saved session info
+        loadSessionInfo()
     }
 
     fun setServiceRunning(isRunning: Boolean) {
