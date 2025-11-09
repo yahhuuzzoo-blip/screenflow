@@ -125,8 +125,9 @@ class NetworkManager(private val context: Context) {
             return
         }
 
-        // Default connection for testing
-        connectToWebSocket("ws://192.168.1.100:8080")
+        // Use relay server URL from settings
+        val relayUrl = SettingsManager.getRelayServerUrl()
+        connectToWebSocket(relayUrl)
     }
 
     fun connectToWebSocket(url: String, sessionId: String = "", encryptionKey: String = "") {
