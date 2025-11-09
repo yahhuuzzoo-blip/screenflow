@@ -1,10 +1,12 @@
 package com.screenflow.viewmodel
 
 import android.app.ActivityManager
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.screenflow.ScreenFlowApplication
 import com.screenflow.service.ScreenCaptureService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
