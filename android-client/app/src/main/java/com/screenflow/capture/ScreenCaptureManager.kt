@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.view.Display
+import com.screenflow.utils.SettingsManager
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
