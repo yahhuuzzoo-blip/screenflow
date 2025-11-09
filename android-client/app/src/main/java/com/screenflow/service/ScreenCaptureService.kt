@@ -167,6 +167,20 @@ class ScreenCaptureService : Service() {
         Timber.d("Display metrics: ${screenWidth}x$screenHeight @ $screenDensity dpi")
     }
 
+    private fun acquireWakeLockIfEnabled() {
+        if (SettingsManager.isKeepAwakeEnabled()) {
+            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+            wakeLock = powerManager.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK,
+                "ScreenFlow::ScreenCaptureWakeLock"
+            )
+            wakeLock?.acquire()
+            Timber.d("WakeLock acquired")
+        } else {
+            Timber.d("Keep awake disabled - WakeLock not acquired")
+        }
+    }
+
     private fun startForegroundService() {
         val notification = createNotification("Initializing...", false)
         startForeground(NOTIFICATION_ID, notification)
