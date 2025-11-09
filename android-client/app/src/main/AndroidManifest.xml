@@ -60,6 +60,15 @@
             android:theme="@style/Theme.ScreenFlow.NoActionBar"
             android:screenOrientation="portrait" />
 
+        <!-- Settings Activity -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.ScreenFlow.NoActionBar"
+            android:screenOrientation="portrait" />
+
         <!-- Screen Capture Service -->
         <service
             android:name=".service.ScreenCaptureService"
