@@ -3,6 +3,7 @@ package com.screenflow.network
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.screenflow.utils.SettingsManager
 import kotlinx.coroutines.*
 import okhttp3.*
 import okio.ByteString
