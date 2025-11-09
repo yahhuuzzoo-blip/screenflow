@@ -386,8 +386,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     private fun openSettings() {
-        // TODO: Implement settings activity
-        Toast.makeText(this, "Settings coming soon", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, SettingsActivity::class.java))
     }
 
     private fun showPermissionDeniedDialog(permission: String) {
