@@ -29,6 +29,9 @@ class ScreenFlowApplication : Application() {
         // Initialize logging
         initializeLogging()
 
+        // Initialize settings manager
+        SettingsManager.initialize(this)
+
         // Create notification channels
         createNotificationChannels()
 
